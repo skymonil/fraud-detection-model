@@ -1,0 +1,135 @@
+
+# ==========================================
+# Python
+# ==========================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+build/
+dist/
+.eggs/
+
+# ==========================================
+# Virtual Environments
+# ==========================================
+venv/
+.venv/
+env/
+ENV/
+
+# ==========================================
+# Environment Variables / Secrets
+# ==========================================
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+secrets/
+credentials/
+
+# ==========================================
+# Dataset Files
+# ==========================================
+data/raw/*
+data/processed/*
+
+# Keep directory structure
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+
+# ==========================================
+# Trained Models
+# ==========================================
+artifacts/models/*
+*.joblib
+*.pkl
+*.pickle
+*.h5
+*.pt
+*.pth
+*.onnx
+
+!artifacts/models/.gitkeep
+
+# ==========================================
+# MLflow
+# ==========================================
+mlruns/
+mlartifacts/
+mlflow.db
+mlflow.db-shm
+mlflow.db-wal
+
+# ==========================================
+# DVC
+# ==========================================
+# Keep .dvc files and configuration tracked.
+# Do not ignore *.dvc or .dvc/config.
+
+# ==========================================
+# Reports / Generated Outputs
+# ==========================================
+reports/eda/*
+reports/baseline/*
+reports/class_weighted/*
+reports/smote/*
+reports/threshold_analysis/*
+reports/final/*
+
+# Keep report directories
+!reports/eda/.gitkeep
+!reports/baseline/.gitkeep
+!reports/class_weighted/.gitkeep
+!reports/smote/.gitkeep
+!reports/threshold_analysis/.gitkeep
+!reports/final/.gitkeep
+
+# ==========================================
+# Jupyter Notebook
+# ==========================================
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# ==========================================
+# IDE / Editor
+# ==========================================
+.vscode/
+.idea/
+*.sublime-workspace
+
+# ==========================================
+# OS Generated Files
+# ==========================================
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# ==========================================
+# Logs / Temporary Files
+# ==========================================
+*.log
+logs/
+tmp/
+temp/
+*.tmp
+
+# ==========================================
+# Testing / Coverage
+# ==========================================
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+
+# ==========================================
+# Type Checking / Linting
+# ==========================================
+.mypy_cache/
+.pyright/
+.ruff_cache/
