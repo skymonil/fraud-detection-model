@@ -34,8 +34,11 @@ credentials/
 # ==========================================
 # Dataset Files
 # ==========================================
+!data/
+data/*
+!data/raw/
 data/raw/*
-data/processed/*
+!data/raw/*.dvc
 
 # Keep directory structure
 !data/raw/.gitkeep
