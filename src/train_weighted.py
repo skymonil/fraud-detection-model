@@ -1,6 +1,7 @@
 
 from pathlib import Path
 import json
+from mlflow_utils import log_training_run
 
 import joblib
 import pandas as pd
@@ -126,3 +127,19 @@ print("\nArtifacts saved:")
 print("Model:", model_path)
 print("Metrics:", metrics_path)
 print("Confusion matrix:", REPORT_DIR / "confusion_matrix.csv")
+
+log_training_run(
+    model=model,
+    run_name="class-weighted-logistic-regression",
+    params={
+        "algorithm": "LogisticRegression",
+        "scaler": "StandardScaler",
+        "class_weight": "balanced",
+        "max_iter": 1000,
+        "random_state": 42,
+        "threshold": 0.5,
+        "dataset": "deduplicated-creditcard",
+    },
+    metrics=metrics,
+    report_dir=REPORT_DIR,
+)

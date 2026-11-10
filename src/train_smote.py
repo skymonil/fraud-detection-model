@@ -7,7 +7,7 @@ import pandas as pd
 
 from imblearn.over_sampling import SMOTE
 from imblearn.pipeline import Pipeline
-
+from mlflow_utils import log_training_run
 from sklearn.preprocessing import StandardScaler
 from sklearn.linear_model import LogisticRegression
 
@@ -133,3 +133,20 @@ print("\nArtifacts saved:")
 print("Model:", model_path)
 print("Metrics:", metrics_path)
 print("Confusion matrix:", REPORT_DIR / "confusion_matrix.csv")
+log_training_run(
+    model=model,
+    run_name="smote-logistic-regression",
+    params={
+        "algorithm": "LogisticRegression",
+        "scaler": "StandardScaler",
+        "sampling_strategy": "auto",
+        "smote_k_neighbors": 5,
+        "smote_random_state": 42,
+        "max_iter": 1000,
+        "random_state": 42,
+        "threshold": 0.5,
+        "dataset": "deduplicated-creditcard",
+    },
+    metrics=metrics,
+    report_dir=REPORT_DIR,
+)
