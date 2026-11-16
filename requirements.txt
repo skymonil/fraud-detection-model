@@ -10,3 +10,4 @@ mlflow
 dvc
 dvc[s3]
 botocore[crt]
+pytest
