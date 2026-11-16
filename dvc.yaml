@@ -1,0 +1,71 @@
+
+stages:
+
+  # Stage 1: Split and preprocess raw dataset
+  split_data:
+    cmd: python src/data_split.py
+    deps:
+      - src/data_split.py
+      - data/raw/creditcard.csv
+    outs:
+      - data/preprocessed/train.csv
+      - data/preprocessed/validation.csv
+      - data/preprocessed/test.csv
+
+  # Stage 2: Baseline Logistic Regression
+  train_baseline:
+    cmd: python src/train_baseline.py
+    deps:
+      - src/train_baseline.py
+      - src/mlflow_utils.py
+      - data/preprocessed/train.csv
+      - data/preprocessed/validation.csv
+    outs:
+      - artifacts/models/logistic_regression_baseline.joblib
+      - reports/baseline
+
+  # Stage 3: Class-weighted Logistic Regression
+  train_weighted:
+    cmd: python src/train_weighted.py
+    deps:
+      - src/train_weighted.py
+      - src/mlflow_utils.py
+      - data/preprocessed/train.csv
+      - data/preprocessed/validation.csv
+    outs:
+      - artifacts/models/logistic_regression_weighted.joblib
+      - reports/class_weighted
+
+  # Stage 4: SMOTE Logistic Regression
+  train_smote:
+    cmd: python src/train_smote.py
+    deps:
+      - src/train_smote.py
+      - src/mlflow_utils.py
+      - data/preprocessed/train.csv
+      - data/preprocessed/validation.csv
+    outs:
+      - artifacts/models/logistic_regression_smote.joblib
+      - reports/smote
+
+  # Stage 5: Analyze prediction thresholds
+  threshold_analysis:
+    cmd: python src/threshold_analysis.py
+    deps:
+      - src/threshold_analysis.py
+      - data/preprocessed/validation.csv
+      - artifacts/models/logistic_regression_baseline.joblib
+      - artifacts/models/logistic_regression_weighted.joblib
+      - artifacts/models/logistic_regression_smote.joblib
+    outs:
+      - reports/threshold_analysis
+
+  # Stage 6: Evaluate selected model on test dataset
+  evaluate_final:
+    cmd: python src/evaluate_final.py
+    deps:
+      - src/evaluate_final.py
+      - data/preprocessed/test.csv
+      - artifacts/models/logistic_regression_baseline.joblib
+    outs:
+      - reports/final

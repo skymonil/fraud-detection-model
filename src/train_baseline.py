@@ -21,7 +21,7 @@ from sklearn.metrics import (
 
 # Project directories
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
-DATA_DIR = PROJECT_ROOT / "data" / "processed"
+DATA_DIR = PROJECT_ROOT / "data" / "preprocessed"
 MODEL_DIR = PROJECT_ROOT / "artifacts" / "models"
 REPORT_DIR = PROJECT_ROOT / "reports" / "baseline"
 

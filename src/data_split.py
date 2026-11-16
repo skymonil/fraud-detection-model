@@ -8,7 +8,7 @@ from sklearn.model_selection import train_test_split
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 
 RAW_DATA = PROJECT_ROOT / "data" / "raw" / "creditcard.csv"
-PROCESSED_DIR = PROJECT_ROOT / "data" / "processed"
+PROCESSED_DIR = PROJECT_ROOT / "data" / "preprocessed"
 
 TARGET = "Class"
 RANDOM_STATE = 42

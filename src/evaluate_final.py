@@ -17,7 +17,7 @@ from sklearn.metrics import (
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 
 MODEL_PATH = PROJECT_ROOT / "artifacts/models/logistic_regression_baseline.joblib"
-TEST_PATH = PROJECT_ROOT / "data/processed/test.csv"
+TEST_PATH = PROJECT_ROOT / "data/preprocessed/test.csv"
 REPORT_DIR = PROJECT_ROOT / "reports/final"
 
 TARGET = "Class"

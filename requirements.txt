@@ -8,3 +8,5 @@ joblib
 imbalanced-learn
 mlflow
 dvc
+dvc[s3]
+botocore[crt]
