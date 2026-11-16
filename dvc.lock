@@ -1,0 +1,163 @@
+schema: '2.0'
+stages:
+  split_data:
+    cmd: python src/data_split.py
+    deps:
+    - path: data/raw/creditcard.csv
+      hash: md5
+      md5: e90efcb83d69faf99fcab8b0255024de
+      size: 150828752
+    - path: src/data_split.py
+      hash: md5
+      md5: 08a3816c0312ea5935db2ef841d9187c
+      size: 2563
+    outs:
+    - path: data/preprocessed/test.csv
+      hash: md5
+      md5: ce43caf6149088e7e278ddc28dff1ce6
+      size: 22601643
+    - path: data/preprocessed/train.csv
+      hash: md5
+      md5: 832a414f66b1101874fce5f2ceb68fc5
+      size: 105480078
+    - path: data/preprocessed/validation.csv
+      hash: md5
+      md5: 3668c616e21028e312c5690acafcf9cc
+      size: 22602986
+  train_baseline:
+    cmd: python src/train_baseline.py
+    deps:
+    - path: data/preprocessed/train.csv
+      hash: md5
+      md5: 832a414f66b1101874fce5f2ceb68fc5
+      size: 105480078
+    - path: data/preprocessed/validation.csv
+      hash: md5
+      md5: 3668c616e21028e312c5690acafcf9cc
+      size: 22602986
+    - path: src/mlflow_utils.py
+      hash: md5
+      md5: a510bd958b1f70d112899998e3fbca3a
+      size: 1567
+    - path: src/train_baseline.py
+      hash: md5
+      md5: 7b7432d97c918ead1b29ede0344af947
+      size: 3523
+    outs:
+    - path: artifacts/models/logistic_regression_baseline.joblib
+      hash: md5
+      md5: 73a83dcc36985e0114c281834acb98e9
+      size: 2721
+    - path: reports/baseline
+      hash: md5
+      md5: a8bebd00f11a873b0c7fd94d548a6972.dir
+      size: 272
+      nfiles: 2
+  train_weighted:
+    cmd: python src/train_weighted.py
+    deps:
+    - path: data/preprocessed/train.csv
+      hash: md5
+      md5: 832a414f66b1101874fce5f2ceb68fc5
+      size: 105480078
+    - path: data/preprocessed/validation.csv
+      hash: md5
+      md5: 3668c616e21028e312c5690acafcf9cc
+      size: 22602986
+    - path: src/mlflow_utils.py
+      hash: md5
+      md5: a510bd958b1f70d112899998e3fbca3a
+      size: 1567
+    - path: src/train_weighted.py
+      hash: md5
+      md5: 1097ba5b56510f7880f8a32c201c04c9
+      size: 3840
+    outs:
+    - path: artifacts/models/logistic_regression_weighted.joblib
+      hash: md5
+      md5: cd2a4bcf4d1cdd6bd966350d8c05cfb1
+      size: 2721
+    - path: reports/class_weighted
+      hash: md5
+      md5: 4546d62d89766d86ff6b917da2850cd9.dir
+      size: 275
+      nfiles: 2
+  train_smote:
+    cmd: python src/train_smote.py
+    deps:
+    - path: data/preprocessed/train.csv
+      hash: md5
+      md5: 832a414f66b1101874fce5f2ceb68fc5
+      size: 105480078
+    - path: data/preprocessed/validation.csv
+      hash: md5
+      md5: 3668c616e21028e312c5690acafcf9cc
+      size: 22602986
+    - path: src/mlflow_utils.py
+      hash: md5
+      md5: a510bd958b1f70d112899998e3fbca3a
+      size: 1567
+    - path: src/train_smote.py
+      hash: md5
+      md5: 36539ee7b03f4a9a632d36166f7bef9f
+      size: 4137
+    outs:
+    - path: artifacts/models/logistic_regression_smote.joblib
+      hash: md5
+      md5: ca59fdbf6577442da65bb196df779f32
+      size: 82733
+    - path: reports/smote
+      hash: md5
+      md5: 34573cb25884c50aa06f5f810fc36f0f.dir
+      size: 274
+      nfiles: 2
+  threshold_analysis:
+    cmd: python src/threshold_analysis.py
+    deps:
+    - path: artifacts/models/logistic_regression_baseline.joblib
+      hash: md5
+      md5: 73a83dcc36985e0114c281834acb98e9
+      size: 2721
+    - path: artifacts/models/logistic_regression_smote.joblib
+      hash: md5
+      md5: ca59fdbf6577442da65bb196df779f32
+      size: 82733
+    - path: artifacts/models/logistic_regression_weighted.joblib
+      hash: md5
+      md5: cd2a4bcf4d1cdd6bd966350d8c05cfb1
+      size: 2721
+    - path: data/preprocessed/validation.csv
+      hash: md5
+      md5: 3668c616e21028e312c5690acafcf9cc
+      size: 22602986
+    - path: src/threshold_analysis.py
+      hash: md5
+      md5: ef890d10709a27fbe2f2b68f06fbceea
+      size: 4449
+    outs:
+    - path: reports/threshold_analysis
+      hash: md5
+      md5: b36d6eafe5001a13e250583583532a8d.dir
+      size: 243914
+      nfiles: 5
+  evaluate_final:
+    cmd: python src/evaluate_final.py
+    deps:
+    - path: artifacts/models/logistic_regression_baseline.joblib
+      hash: md5
+      md5: 73a83dcc36985e0114c281834acb98e9
+      size: 2721
+    - path: data/preprocessed/test.csv
+      hash: md5
+      md5: ce43caf6149088e7e278ddc28dff1ce6
+      size: 22601643
+    - path: src/evaluate_final.py
+      hash: md5
+      md5: 7f35c39e8e5f124573bf1b576deaf70f
+      size: 2258
+    outs:
+    - path: reports/final
+      hash: md5
+      md5: 67a1ccb5e51572a20cf9abdc9470f5cd.dir
+      size: 287
+      nfiles: 2

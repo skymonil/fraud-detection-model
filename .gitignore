@@ -141,3 +141,5 @@ htmlcov/
 .ruff_cache/
 
 data/preprocessed/*.csv
+
+data/preprocessed/*.csv
