@@ -30,7 +30,7 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install pandas numpy scikit-learn joblib pytest "dvc[s3]"
+          pip install pandas numpy scikit-learn joblib pytest "dvc[s3]"   fastapi uvicorn httpx requests
 
       # 4. Download datasets, model and reports from DVC remote
       - name: Pull DVC artifacts
@@ -44,4 +44,4 @@ jobs:
       # 5. Execute automated tests
       - name: Run pytest
         run: |
-          pytest tests/ -v
+          python -m pytest tests/ -v
