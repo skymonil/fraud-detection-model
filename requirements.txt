@@ -11,3 +11,6 @@ dvc
 dvc[s3]
 botocore[crt]
 pytest
+fastapi 
+uvicorn 
+httpx
